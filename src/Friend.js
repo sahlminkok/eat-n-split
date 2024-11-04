@@ -1,20 +1,28 @@
 import React from "react";
 import Button from "./Button";
 
-const Friend = ({ name, image, balance }) => {
+const Friend = ({ friend, onSelection, selectedFriend }) => {
+  const isSelected = selectedFriend?.id === friend.id;
+
   return (
-    <li>
-      <img src={image} alt={name} />
-      <h3>{name}</h3>
-      <p className={balance > 0 ? "green" : balance < 0 ? "red" : ""}>
-        {balance === 0
-          ? `You and ${name} are even`
-          : balance < 0
-          ? `You owe ${name} $${Math.abs(balance)}`
-          : `${name} owes you $${balance}`}
+    <li className={isSelected ? "selected" : ""}>
+      <img src={friend.image} alt={friend.name} />
+      <h3>{friend.name}</h3>
+      <p
+        className={
+          friend.balance > 0 ? "green" : friend.balance < 0 ? "red" : ""
+        }
+      >
+        {friend.balance === 0
+          ? `You and ${friend.name} are even`
+          : friend.balance < 0
+          ? `You owe ${friend.name} $${Math.abs(friend.balance)}`
+          : `${friend.name} owes you $${friend.balance}`}
       </p>
 
-      <Button>Select</Button>
+      <Button onAction={() => onSelection(friend)}>
+        {isSelected ? "close" : "Select"}
+      </Button>
     </li>
   );
 };

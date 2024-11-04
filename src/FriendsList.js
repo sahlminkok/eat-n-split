@@ -1,16 +1,16 @@
 import React from "react";
 import Friend from "./Friend";
 
-const FriendsList = ({ friends }) => {
+const FriendsList = ({ friends, onSelection, selectedFriend }) => {
   return (
     <>
       <ul>
         {friends.map((friend) => (
           <Friend
             key={friend.id}
-            name={friend.name}
-            image={friend.image}
-            balance={friend.balance}
+            friend={friend}
+            onSelection={onSelection}
+            selectedFriend={selectedFriend}
           />
         ))}
       </ul>
